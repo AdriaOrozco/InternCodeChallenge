@@ -1,25 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import './index';
+import React, {Component} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    render() {
+        return (
+            <Canciones canciones={this.state.canciones} />
+        )
+    }
+
+    state = {
+        canciones: []
+    };
+
+    componentDidMount() {
+        fetch('https://gj05ju1755.execute-api.eu-west-1.amazonaws.com/dev/codechallenge/music/random')
+            .then(res => res.json())
+            .then((data) => {
+                this.setState({ canciones: data["items"] })
+            })
+            .catch(console.log)
+    }
 }
+const Canciones = ({canciones}) => {
+    return (
+        <div>
+            <center><h1>Canciones</h1></center>
+            {canciones.map((canciones) => (
+                <div>
+                    <div>
+                        <h5 id={canciones.id}>{canciones.name}</h5>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+};
 
 export default App;
