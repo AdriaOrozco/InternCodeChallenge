@@ -25,18 +25,19 @@ class App extends Component {
 }
 const Canciones = ({canciones}) => {
     return (
-        <div>
-            <center><h1>Canciones</h1></center>
+        <div class="FondoCanciones">
+            <h1 id="Titulo">Canciones</h1>
             <table>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Artistas</th>
-
+                    <th colSpan="2">Título</th>
                 </tr>
                 {canciones.map((canciones) => (
                 <tr id={canciones.id}>
-                    <td>{canciones.name}</td>
-                    <td>{mostrarArtistas(canciones)}</td>
+                    <td><img src={canciones.album.images[2].url} /></td>
+                    <td>
+                        <tr>{canciones.name}</tr>
+                        <tr>{mostrarArtistas(canciones)}</tr>
+                    </td>
                 </tr>
                 ))}
             </table>
